@@ -3,17 +3,18 @@
 #!/bin/bash
 
 # bash script to 
-# 1) setup the folder structure for SIPP 2004 panel and
+# 1) setup the folder structure for SIPP ${year} panel and
 # 2) download all raw data, do files and dct files from NBER
 
 
 echo ""
-echo "downloading data from NBER"
-echo "=========================="
+echo "downloading 1996 data from NBER"
+echo "==============================="
 echo ""
 
+year=1996
+
 cd ~/datasets/SIPP
-year=2004
 mkdir -p ${year}
 cd ${year}
 mkdir -p doc
@@ -22,16 +23,16 @@ mkdir -p dta
 mkdir -p dat
 mkdir -p out
 
-# download 2004 .do and .dct files for all core and topical modules
+# download ${year} .do and .dct files for all core and topical modules
 
 
 cd do_NBER
 
-for file in sip04w sip04t
+for file in sip96w sip96t
 
 do
 
-	for (( ix=1; ix<13; ix++ ))
+	for (( ix=1; ix<12; ix++ ))
 	do
 		if [[ -e ${file}${ix}.do  ]];
 		then
@@ -55,23 +56,24 @@ done
 
 			
 echo ""
-echo "downloading raw data. will take a while."
-echo "========================================"
+echo "downloading CORE raw data. will take a while."
+echo "============================================="
 echo ""
+
 
 
 cd ..
 cd dat
 
-for file in sipp04w 
+for file in sipp96l
 
 do
 
-	for (( ix=1; ix<13; ix++ ))
+	for (( ix=1; ix<10; ix++ ))
 	do
-		if [[ -e l04puw${ix}.dat ]];
+		if [[ -e l96puw${ix}.dat ]];
 		then
-			echo "file l04puw${ix}.dat exists."
+			echo "file ${file}${ix}.* exists."
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.zip"
@@ -86,15 +88,20 @@ do
 
 done
 
-for file in sipp04t
+echo ""
+echo "downloading TOPICAL raw data. will take a while."
+echo "================================================"
+echo ""
+
+for file in sipp96t
 
 do
 
-	for (( ix=1; ix<9; ix++ ))
+	for (( ix=1; ix<10; ix++ ))
 	do
-		if [[ -e p04putm${ix}.dat ]];
+		if [[ -e p96putm${ix}.dat ]];
 		then
-			echo "file p04putm${ix}.dat exists."
+			echo "file ${file}${ix}.* exists."
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.zip"

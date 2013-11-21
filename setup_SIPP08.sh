@@ -3,7 +3,7 @@
 #!/bin/bash
 
 # bash script to 
-# 1) setup the folder structure for SIPP 2004 panel and
+# 1) setup the folder structure for SIPP 2008 panel and
 # 2) download all raw data, do files and dct files from NBER
 
 
@@ -13,7 +13,7 @@ echo "=========================="
 echo ""
 
 cd ~/datasets/SIPP
-year=2004
+year=2008
 mkdir -p ${year}
 cd ${year}
 mkdir -p doc
@@ -26,8 +26,7 @@ mkdir -p out
 
 
 cd do_NBER
-
-for file in sip04w sip04t
+for file in sippl08puw sippp08putm
 
 do
 
@@ -63,51 +62,28 @@ echo ""
 cd ..
 cd dat
 
-for file in sipp04w 
+for file in l08puw p08putm
 
 do
 
-	for (( ix=1; ix<13; ix++ ))
+	for (( ix=1; ix<=13; ix++ ))
 	do
-		if [[ -e l04puw${ix}.dat ]];
+		if [[ -e ${file}${ix}.dat ]];
 		then
-			echo "file l04puw${ix}.dat exists."
+			echo "file ${file}${ix}.* exists."
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.zip"
-			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.zip
+			wget -P ~/datasets/SIPP/2008/raw/ http://www.nber.org/sipp/2008/${file}${ix}.zip
 			unzip ${file}${ix}.zip
 			rm ${file}${ix}.zip
 			echo "unzipped and deleted ${file}${ix}.zip"
 			echo "done with ${file}${ix}.dat"
-			echo ""
 		fi
 	done
 
 done
 
-for file in sipp04t
-
-do
-
-	for (( ix=1; ix<9; ix++ ))
-	do
-		if [[ -e p04putm${ix}.dat ]];
-		then
-			echo "file p04putm${ix}.dat exists."
-			echo ""
-		else 
-			echo "downloading file ${file}${ix}.zip"
-			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.zip
-			unzip ${file}${ix}.zip
-			rm ${file}${ix}.zip
-			echo "unzipped and deleted ${file}${ix}.zip"
-			echo "done with ${file}${ix}.dat"
-			echo ""
-		fi
-	done
-
-done
 
 echo "program end."
 
