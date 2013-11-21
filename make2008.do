@@ -7,6 +7,7 @@
 ** to work with this script.
 
 clear
+set more off
 cd ~/datasets/SIPP/2008/do
 
 
