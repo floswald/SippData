@@ -70,13 +70,13 @@ echo ""
 cd ..
 cd dat
 
-for file in l${yr}puw p${yr}putm
+for file in l${yr}puw 
 
 do
 
 	for (( ix=1; ix<=${numcore}; ix++ ))
 	do
-		if [[ -e ${file}${ix}.dat ]];
+		if [[ -e l${yr}puw${ix}.dat ]];
 		then
 			echo "file ${file}${ix}.* exists."
 			echo ""
@@ -92,6 +92,32 @@ do
 
 done
 
+echo ""
+echo "downloading TOPICAL raw data. will take a while."
+echo "============================================="
+echo ""
+
+for file in  p${yr}putm
+
+do
+
+	for (( ix=1; ix<=${numcore}; ix++ ))
+	do
+		if [[ -e p${yr}putm${ix}.dat ]];
+		then
+			echo "file ${file}${ix}.* exists."
+			echo ""
+		else 
+			echo "downloading file ${file}${ix}.zip"
+			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.zip
+			unzip ${file}${ix}.zip
+			rm ${file}${ix}.zip
+			echo "unzipped and deleted ${file}${ix}.zip"
+			echo "done with ${file}${ix}.dat"
+		fi
+	done
+
+done
 
 echo "program setup_SIPP08 ends."
 

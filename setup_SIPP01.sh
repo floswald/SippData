@@ -84,7 +84,7 @@ do
 
 	for (( ix=1; ix<${numcore}; ix++ ))
 	do
-		if [[ -e l${yr}puw${ix}.dat ]];
+		if [[ -e sipp${yr}w${ix}.dat ]];
 		then
 			echo "file l${yr}puw${ix}.dat exists."
 			echo ""
@@ -114,7 +114,7 @@ do
 
 	for (( ix=1; ix<${numtopi}; ix++ ))
 	do
-		if [[ -e p${yr}putm${ix}.dat ]];
+		if [[ -e sipp${yr}t${ix}.dat ]];
 		then
 			echo "file p${yr}putm${ix}.dat exists."
 			echo ""

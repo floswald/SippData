@@ -15,8 +15,11 @@ you need a unix/macOS machine to run the bash scripts. (I think).
 Proceed like this:
 
 1. run each of the setup_SIPPyy.sh scripts with `./setup_SIPPyy.sh` on your command line. This should download all the raw data
-   into a folder structure I set up at ~/datasets/SIPP. You can change that location by changing the variable `dest` inside the scripts
+   into a folder structure I set up at `~/datasets/SIPP`. You can change that location by changing the variable `dest` inside the scripts
 2. run each of the `makeyyyy.do` scripts in stata. this should read the raw data into stata format and apply the labels.
+
+The bash scripts will check if a file exists, to avoid downloading large files again. if you think anything went wrong
+during the process, just delete a folder in `~/datasets/SIPP` to recreate it.
 
 
 ## Disclaimer
