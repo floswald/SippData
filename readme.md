@@ -10,7 +10,10 @@ This repository contains
 
 ## useage
 
-you need a unix/macOS machine to run the bash scripts. (I think).
+* you need a unix/macOS machine to run the bash scripts. (I think).
+* downloads core and topical modules form SIPP
+* The typical stata data for a panel has about 7GB
+* the entire raw data is 50GB
 
 Proceed like this:
 
@@ -20,6 +23,8 @@ Proceed like this:
 
 The bash scripts will check if a file exists, to avoid downloading large files again. if you think anything went wrong
 during the process, just delete a folder in `~/datasets/SIPP` to recreate it.
+
+Each panel has about 7GB in stata format
 
 
 ## Disclaimer
