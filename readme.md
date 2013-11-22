@@ -26,4 +26,3 @@ The usual disclaimer applies, i.e. I do not guarantee anything about this softwa
 ## Copyright
 
 * The original do-files are all copyright NBER. Please see the link above.
-* All modifications 
