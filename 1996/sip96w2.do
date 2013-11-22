@@ -9,7 +9,9 @@ local dta_name "../dta/`1'.dta"
 
 ** The following line should contain the path to the data dictionary file 
 
-local dct_name "`1'.dct"
+local dct_name "$dcts/`1'.dct"
+
+quietly infile using "`dct_name'", using("`dat_name'") clear
 
 *Everything below this point are value labels
 

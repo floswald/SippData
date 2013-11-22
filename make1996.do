@@ -46,8 +46,13 @@ global progs "~/git/SippData/1996"
 ** go into current year's dictionary directory
 cd "$root/1996/dct"
 
+** however here don't use the NBER supplied dct files
+** because they have a faulty first line. use
 
-forvalues i = 1(1)12  {
+global dcts "~/git/SippData/1996/dct"
+
+
+forvalues i = 1(1)9  {
 
 	** if core data does not exist, make it
 	capture confirm file "../dta/sip96w`i'.dta"
@@ -55,7 +60,7 @@ forvalues i = 1(1)12  {
 
 		display "doing core wave `i'"
 		
-		do $progs/sip96w`i'.do sip96w`i' sipp96l`i'
+		do $progs/sip96w`i'.do sip96w`i' sipp96l`i' 
 
 	} 
 
@@ -67,7 +72,7 @@ forvalues i = 1(1)12  {
 		if _rc!=0 {
 			
 		display "doing topical wave `i'"
-			do $progs/sip96t`i'.do sip96t`i' sipp96t`i'
+			do $progs/sip96t`i'.do sip96t`i' sipp96t`i' 
 		} 
 	}
 }
