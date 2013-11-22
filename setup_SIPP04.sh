@@ -12,12 +12,27 @@ echo "downloading data from NBER"
 echo "=========================="
 echo ""
 
-cd ~/datasets/SIPP
+dest=~/datasets/SIPP
+cd $dest
+
 year=2004
+yr=04
+
+if [ $yr -eq 04 ]
+then
+	numcore=13
+	numtopi=9
+else
+	numcore=10
+	numtopi=10
+fi
+
+
 mkdir -p ${year}
 cd ${year}
 mkdir -p doc
 mkdir -p do_NBER	# create folder for NBER do files. I'll change those
+mkdir -p dct    	
 mkdir -p dta
 mkdir -p dat
 mkdir -p out
@@ -27,11 +42,11 @@ mkdir -p out
 
 cd do_NBER
 
-for file in sip04w sip04t
+for file in sip${yr}w sip${yr}t
 
 do
 
-	for (( ix=1; ix<13; ix++ ))
+	for (( ix=1; ix<${numcore}; ix++ ))
 	do
 		if [[ -e ${file}${ix}.do  ]];
 		then
@@ -39,15 +54,15 @@ do
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.do"
-			wget --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.do
+			wget --no-verbose -P ${dest}/${year}/do_NBER http://www.nber.org/sipp/${year}/${file}${ix}.do
 		fi
-		if [[ -e ${file}${ix}.dct ]];
+		if [[ -e ../dct/${file}${ix}.dct ]];
 		then
 			echo "file ${file}${ix}.dct exists."
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.dct"
-			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.dct
+			wget  --no-verbose -P ${dest}/${year}/dct http://www.nber.org/sipp/${year}/${file}${ix}.dct
 		fi
 	done
 
@@ -55,21 +70,21 @@ done
 
 			
 echo ""
-echo "downloading raw data. will take a while."
-echo "========================================"
+echo "downloading CORE raw data. will take a while."
+echo "============================================="
 echo ""
 
 
 cd ..
 cd dat
 
-for file in sipp04w 
+for file in sipp${yr}w 
 
 do
 
-	for (( ix=1; ix<13; ix++ ))
+	for (( ix=1; ix<${numcore}; ix++ ))
 	do
-		if [[ -e l04puw${ix}.dat ]];
+		if [[ -e l${yr}puw${ix}.dat ]];
 		then
 			echo "file l04puw${ix}.dat exists."
 			echo ""
@@ -86,13 +101,20 @@ do
 
 done
 
-for file in sipp04t
+
+echo ""
+echo "downloading TOPICAL raw data. will take a while."
+echo "================================================"
+echo ""
+
+
+for file in sipp${yr}t
 
 do
 
-	for (( ix=1; ix<9; ix++ ))
+	for (( ix=1; ix<${numtopi}; ix++ ))
 	do
-		if [[ -e p04putm${ix}.dat ]];
+		if [[ -e p${yr}putm${ix}.dat ]];
 		then
 			echo "file p04putm${ix}.dat exists."
 			echo ""
@@ -109,5 +131,5 @@ do
 
 done
 
-echo "program end."
+echo "program setup_SIPP04 ends."
 

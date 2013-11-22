@@ -1,12 +1,13 @@
 
+
 ** construct dta files form raw data
 ** =================================
 
-** Loop over all 2008 SIPP panel do files as supplied by NBER
+** Loop over all 1996 SIPP panel do files as supplied by NBER
 ** note that the do files of each wave have have been adapted
 ** to work with this script.
 
-** if you downloaded my git repository, you have got a folder 2008/
+** if you downloaded my git repository, you have got a folder 1996/
 ** that contains all modified NBER do files.
 
 ** if for some reason you don't want to use those,
@@ -34,29 +35,39 @@
 
 ** copyright NBER. see the original file in do_NBER
 
+
+
+
 clear
 set more off
-cd ~/datasets/SIPP/2008/do
+global root "~/datasets/SIPP"
+global progs "~/git/SippData/1996"
+
+** go into current year's dictionary directory
+cd "$root/1996/dct"
 
 
-forvalues i = 1(1)13  {
+forvalues i = 1(1)12  {
 
 	** if core data does not exist, make it
-	capture confirm file "../dta/sippl08puw`i'.dta"
+	capture confirm file "../dta/sip96w`i'.dta"
 	if _rc!=0 {
-		
+
 		display "doing core wave `i'"
-		do sippl08puw`i'.do sippl08puw`i' l08puw`i'
+		
+		do $progs/sip96w`i'.do sip96w`i' sipp96l`i'
+
 	} 
 
-	if `i' < 12 {
+	if `i' < 9 {
+
 
 		** if topical module data does not exist, make it
-		capture confirm file "../dta/sippp08putm`i'.dta"
+		capture confirm file "../dta/sip96t`i'.dta"
 		if _rc!=0 {
 			
 		display "doing topical wave `i'"
-			do sippp08putm`i'.do sippp08putm`i' p08putm`i'
+			do $progs/sip96t`i'.do sip96t`i' sipp96t`i'
 		} 
 	}
 }

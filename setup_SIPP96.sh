@@ -12,13 +12,18 @@ echo "downloading 1996 data from NBER"
 echo "==============================="
 echo ""
 
-year=1996
+dest=~/datasets/SIPP
+cd $dest
 
-cd ~/datasets/SIPP
+year=1996
+yr=96
+
+
 mkdir -p ${year}
 cd ${year}
 mkdir -p doc
 mkdir -p do_NBER	# create folder for NBER do files. I'll change those
+mkdir -p dct    	
 mkdir -p dta
 mkdir -p dat
 mkdir -p out
@@ -40,15 +45,15 @@ do
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.do"
-			wget --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.do
+			wget --no-verbose -P ${dest}/${year}/do_NBER http://www.nber.org/sipp/${year}/${file}${ix}.do
 		fi
-		if [[ -e ${file}${ix}.dct ]];
+		if [[ -e ../dct/${file}${ix}.dct ]];
 		then
 			echo "file ${file}${ix}.dct exists."
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.dct"
-			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.dct
+			wget --no-verbose -P ${dest}/${year}/dct http://www.nber.org/sipp/${year}/${file}${ix}.dct
 		fi
 	done
 
@@ -65,13 +70,13 @@ echo ""
 cd ..
 cd dat
 
-for file in sipp96l
+for file in sipp${yr}l
 
 do
 
 	for (( ix=1; ix<10; ix++ ))
 	do
-		if [[ -e l96puw${ix}.dat ]];
+		if [[ -e sipp${yr}l${ix}.dat ]];
 		then
 			echo "file ${file}${ix}.* exists."
 			echo ""
@@ -93,13 +98,13 @@ echo "downloading TOPICAL raw data. will take a while."
 echo "================================================"
 echo ""
 
-for file in sipp96t
+for file in sipp${yr}t
 
 do
 
 	for (( ix=1; ix<10; ix++ ))
 	do
-		if [[ -e p96putm${ix}.dat ]];
+		if [[ -e sipp${yr}t${ix}.dat ]];
 		then
 			echo "file ${file}${ix}.* exists."
 			echo ""
@@ -116,5 +121,5 @@ do
 
 done
 
-echo "program end."
+echo "program setup_SIPP96 ends."
 

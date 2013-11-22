@@ -12,25 +12,33 @@ echo "downloading data from NBER"
 echo "=========================="
 echo ""
 
-cd ~/datasets/SIPP
+dest=~/datasets/SIPP
+cd $dest
+
 year=2008
+yr=08
+
+numcore=13
+numtopi=9
+
+
 mkdir -p ${year}
 cd ${year}
 mkdir -p doc
 mkdir -p do_NBER	# create folder for NBER do files. I'll change those
+mkdir -p dct    	
 mkdir -p dta
 mkdir -p dat
 mkdir -p out
 
-# download 2004 .do and .dct files for all core and topical modules
-
 
 cd do_NBER
-for file in sippl08puw sippp08putm
+
+for file in sippl${yr}puw sippp${yr}putm
 
 do
 
-	for (( ix=1; ix<13; ix++ ))
+	for (( ix=1; ix<${numcore}; ix++ ))
 	do
 		if [[ -e ${file}${ix}.do  ]];
 		then
@@ -38,15 +46,15 @@ do
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.do"
-			wget --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.do
+			wget --no-verbose -P ${dest}/${year}/do_NBER http://www.nber.org/sipp/${year}/${file}${ix}.do
 		fi
-		if [[ -e ${file}${ix}.dct ]];
+		if [[ -e ../dct/${file}${ix}.dct ]];
 		then
 			echo "file ${file}${ix}.dct exists."
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.dct"
-			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.dct
+			wget  --no-verbose -P ${dest}/${year}/dct http://www.nber.org/sipp/${year}/${file}${ix}.dct
 		fi
 	done
 
@@ -54,19 +62,19 @@ done
 
 			
 echo ""
-echo "downloading raw data. will take a while."
-echo "========================================"
+echo "downloading CORE raw data. will take a while."
+echo "============================================="
 echo ""
 
 
 cd ..
 cd dat
 
-for file in l08puw p08putm
+for file in l${yr}puw p${yr}putm
 
 do
 
-	for (( ix=1; ix<=13; ix++ ))
+	for (( ix=1; ix<=${numcore}; ix++ ))
 	do
 		if [[ -e ${file}${ix}.dat ]];
 		then
@@ -74,7 +82,7 @@ do
 			echo ""
 		else 
 			echo "downloading file ${file}${ix}.zip"
-			wget -P ~/datasets/SIPP/2008/raw/ http://www.nber.org/sipp/2008/${file}${ix}.zip
+			wget  --no-verbose http://www.nber.org/sipp/${year}/${file}${ix}.zip
 			unzip ${file}${ix}.zip
 			rm ${file}${ix}.zip
 			echo "unzipped and deleted ${file}${ix}.zip"
@@ -85,5 +93,5 @@ do
 done
 
 
-echo "program end."
+echo "program setup_SIPP08 ends."
 
