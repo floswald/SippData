@@ -35,7 +35,6 @@ mkdir -p do_NBER	# create folder for NBER do files. I'll change those
 mkdir -p dct    	
 mkdir -p dta
 mkdir -p dat
-mkdir -p out
 
 # download 2004 .do and .dct files for all core and topical modules
 

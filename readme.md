@@ -14,6 +14,8 @@ This repository contains
 * downloads core and topical modules form SIPP
 * The typical stata data for a panel has about 7GB
 * the entire raw data is 50GB
+* The structure of the files online is not uniform; file names change from one panel to the next, so don't expect
+  uniform filenames in the bash scripts either.
 
 Proceed like this:
 
