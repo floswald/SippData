@@ -58,6 +58,27 @@ do
 
 done
 
+echo "downloading file sipp96l.pdf"
+wget --no-verbose -P ${dest}/${year}/doc http://www.nber.org/sipp/${year}/sipp96l.pdf
+
+for file in sipp96t
+do
+
+	for (( ix=1; ix<12 ;ix++ ))
+	do
+		if [[ -e ../doc/${file}${ix}.pdf ]];
+		then
+			echo "file ${file}${ix}.pdf exists."
+			echo ""
+		else 
+			echo "downloading file ${file}${ix}.pdf"
+			wget --no-verbose -P ${dest}/${year}/doc http://www.nber.org/sipp/${year}/${file}${ix}.pdf
+		fi
+	done
+done
+
+
+
 			
 echo ""
 echo "downloading CORE raw data. will take a while."

@@ -67,6 +67,31 @@ do
 
 done
 
+
+for file in sipp${yr}w sipp${yr}t
+do
+
+	for (( ix=1; ix<${numcore} ;ix++ ))
+	do
+		if [[ -e ../doc/${file}${ix}c.pdf ]];
+		then
+			echo "file ${file}${ix}.pdf exists."
+			echo ""
+		else 
+			echo "downloading file ${file}${ix}.pdf"
+			if [[ "$file" = "sipp${yr}w" ]]
+			then
+				wget --no-verbose -P ${dest}/${year}/doc http://www.nber.org/sipp/${year}/${file}${ix}c.pdf
+			else
+				wget --no-verbose -P ${dest}/${year}/doc http://www.nber.org/sipp/${year}/${file}${ix}.pdf
+			fi
+		fi
+	done
+done
+
+
+
+
 			
 echo ""
 echo "downloading CORE raw data. will take a while."
