@@ -1,4 +1,3 @@
-l
 clear
 cap log close
 local dat_name "../dat/`2'.dat"
