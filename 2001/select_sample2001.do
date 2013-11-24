@@ -1,6 +1,6 @@
 
 
-/* sample selection script */
+/* 2001 SIPP sample selection script */
 /* selects core sample and merges topical datasets */
 
 /* read http://www.census.gov/sipp/usrguide/sipp2001.pdf for general overview and structure */
@@ -31,7 +31,7 @@
 ** topical modules index
 ** =====================
 
-** sippp08putm2.dta: migration history. documentation at http://www.nber.org/sipp/2008/2008w2tm.pdf
+** sip01t2.dta: migration history. 
 
 *	tprstate	state or country of previous home
 *	eprevres	where the previous home was
@@ -41,7 +41,7 @@
 *	tmovest		year moved into this state
 *	eprevten	type of tenure of the previous home
  
-** sippp08putm4.dta: wealth. real estate, assets and liabilities, total net worth thhtnw
+** sip01t3.dta: wealth. real estate, assets and liabilities, total net worth thhtnw
 ** doc at http://www.nber.org/sipp/2008/2008w4tm.pdf
 
 *	thhtnw		total net worth recode
@@ -51,8 +51,8 @@
 *	ehbuyyr 	year house was purchased
  	
 
-** sippp08putm7.dta: wealth. real estate, assets and liabilities, total net worth thhtnw
-** sippp08putm10.dta: wealth. real estate, assets and liabilities, total net worth thhtnw
+** sip01t6.dta: wealth. real estate, assets and liabilities, total net worth thhtnw
+** sip01t9.dta: wealth. real estate, assets and liabilities, total net worth thhtnw
 
 ** merge instructions:
 ** ===================
@@ -75,7 +75,7 @@
 * those values are constant within each wave.
 
 clear
-cd ~/datasets/SIPP/2008/dta
+cd ~/datasets/SIPP/2001/dta
 set more off
 
 ** variable index is online at
@@ -87,13 +87,13 @@ local corevars ssuid
 shhadid
 srefmon
 rhcalmn
+errp
 rhcalyr
 tfipsst
 tmovrflg
 eoutcome
 eppintvw
 rhnf
-errp
 tmetro
 etenure
 epubhse
@@ -111,7 +111,6 @@ eentaid
 tage
 esex
 erace
-ebornus
 eafnow
 ems
 epdjbthn
@@ -126,10 +125,10 @@ local wlthvars ssuid eentaid epppnum thhtnw thhtwlth thhtheq thhmortg ehbuyyr
 tempfile tmp
 
 
-foreach wave of numlist 1(1)13 {
+foreach wave of numlist 1(1)9 {
 
 	** open core(wave) dataset
-	use `corevars' using sippl08puw`wave'.dta,clear
+	use `corevars' using sip01w`wave'.dta,clear
 
 	** subset core data
 	** ----------------
@@ -148,7 +147,7 @@ foreach wave of numlist 1(1)13 {
 	save `tmp', replace
 
 	** open migration history
-	use sippp08putm2.dta,clear
+	use sip01t2.dta,clear
 
 	** merge required variables from mighist onto tmp 
 	keep ssuid eentaid epppnum tprstate eprevres tbrstate tmovyryr toutinyr tmovest eprevten
@@ -165,8 +164,8 @@ foreach wave of numlist 1(1)13 {
 	sort ssuid eentaid epppnum srefmon
 	save `tmp', replace
 
-	** open wealth4
-	use `wlthvars' using sippp08putm4.dta,clear
+	** open wealth
+	use `wlthvars' using sip01t3.dta,clear
 	sort ssuid eentaid epppnum
 
 	** merge required variables from wealth4 onto tmp
@@ -177,8 +176,8 @@ foreach wave of numlist 1(1)13 {
 	sort ssuid eentaid epppnum srefmon
 	save `tmp', replace
 
-	** open wealth7
-	use `wlthvars' using sippp08putm7.dta,clear
+	** open wealth
+	use `wlthvars' using sip01t6.dta,clear
 	sort ssuid eentaid epppnum
 
 	** merge required variables with suffix _7 from wealth7 onto tmp
@@ -188,15 +187,6 @@ foreach wave of numlist 1(1)13 {
 	** save tmp
 	sort ssuid eentaid epppnum srefmon
 	save`tmp', replace
-
-	** open wealth10
-	use `wlthvars' using sippp08putm10.dta,clear
-	sort ssuid eentaid epppnum
-
-	** merge required variables with suffix _10 from wealth10 onto tmp
-	/*merge m:1 ssuid eentaid epppnum using tmp, replace assert(master match) keep(match master)*/
-	merge 1:m ssuid eentaid epppnum using `tmp', assert(master match) keep(match master)
-	drop _merge
 
 	** save 
 	sort ssuid eentaid epppnum srefmon
