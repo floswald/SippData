@@ -199,8 +199,18 @@ foreach wave of numlist 1(1)9 {
 
 }
 
+** stack togehter
 
+cd $root/1996/dta/core_and_topical
+use core_top1.dta, clear
 
+foreach wave of numlist 2(1)9 {
+
+	append using core_top`wave'.dta
+
+}
+
+save core_top_1996.dta,replace
 
 
 

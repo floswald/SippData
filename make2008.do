@@ -36,7 +36,11 @@
 
 clear
 set more off
-cd ~/datasets/SIPP/2008/do
+global root "~/datasets/SIPP"
+global progs "~/git/SippData/2008"
+
+** go into current year's dictionary directory
+cd "$root/2008/dct"
 
 
 forvalues i = 1(1)13  {
@@ -59,6 +63,8 @@ forvalues i = 1(1)13  {
 			do sippp08putm`i'.do sippp08putm`i' p08putm`i'
 		} 
 	}
+	** make longitudinal weight
+	do $progs/sipplgtwgt2008w7.do
 }
 
 

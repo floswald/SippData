@@ -47,7 +47,7 @@ cd "$root/2001/dct"
 forvalues i = 1(1)9  {
 
 	** if core data does not exist, make it
-	capture confirm file "../dta/sipp01w`i'.dta"
+	capture confirm file "../dta/sip01w`i'.dta"
 	if _rc!=0 {
 		
 		display "doing core wave `i'"
@@ -57,12 +57,14 @@ forvalues i = 1(1)9  {
 
 
 	** if topical module data does not exist, make it
-	capture confirm file "../dta/sipp01t`i'.dta"
+	capture confirm file "../dta/sip01t`i'.dta"
 	if _rc!=0 {
 		
 		display "doing topical wave `i'"
 		do $progs/sip01t`i'.do sip01t`i' sipp01t`i'
 	}
+	** make longitudinal weight
+	do $progs/sip01lw.do
 }
 
 

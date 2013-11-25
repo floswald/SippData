@@ -58,6 +58,16 @@ do
 
 done
 
+# download longitudinal weight
+echo ""
+echo ""
+echo "downloading longitudinal weight"
+wget  --no-verbose -P ${dest}/${year}/do_NBER http://www.nber.org/sipp/${year}/sip96lw.do
+wget  --no-verbose -P ${dest}/${year}/dct http://www.nber.org/sipp/${year}/sip96lw.dct
+wget  --no-verbose -P ${dest}/${year}/dat http://www.nber.org/sipp/${year}/sipp96lw.zip
+
+echo ""
+echo ""
 echo "downloading file sipp96l.pdf"
 wget --no-verbose -P ${dest}/${year}/doc http://www.nber.org/sipp/${year}/sipp96l.pdf
 

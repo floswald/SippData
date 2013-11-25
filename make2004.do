@@ -69,6 +69,8 @@ forvalues i = 1(1)12  {
 			do $progs/sip04t`i'.do sip04t`i' p04putm`i'
 		} 
 	}
+	** make longitudinal weight
+	do $progs/sip04lw4.do
 }
 
 

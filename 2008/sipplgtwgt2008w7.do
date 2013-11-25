@@ -16,11 +16,11 @@ clear
 **   the complete path and name of the raw data file.
 **   On a PC, use backslashes in paths as in C:\  
 
-local dat_name "../raw/lgtwgt2008w7.dat"
+local dat_name "../dat/lgtwgt2008w7.dat"
 
 ** The following line should contain the path to your output '.dta' file 
 
-local dta_name "../dta/lgtwgt2008w7.dat"
+local dta_name "../dta/lgtwgt2008w7.dta"
 
 ** The following line should contain the path to the data dictionary file 
 
