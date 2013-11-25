@@ -26,6 +26,7 @@ mkdir -p do_NBER	# create folder for NBER do files. I'll change those
 mkdir -p dct    	
 mkdir -p dta
 mkdir -p dat
+mkdir -p dat/core_and_topical
 
 # download ${year} .do and .dct files for all core and topical modules
 

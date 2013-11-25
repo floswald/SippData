@@ -29,6 +29,7 @@ mkdir -p do_NBER	# create folder for NBER do files. I'll change those
 mkdir -p dct    	
 mkdir -p dta
 mkdir -p dat
+mkdir -p dat/core_and_topical
 
 
 cd do_NBER
