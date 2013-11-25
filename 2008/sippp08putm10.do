@@ -2,7 +2,7 @@
 
 clear 
 cap log close
-local dat_name "../raw/`2'.dat"
+local dat_name "../dat/`2'.dat"
 
 ** The following line should contain the path to your output '.dta' file 
 
