@@ -98,6 +98,7 @@ etenure
 epubhse
 tmthrnt
 rfid
+whfnwgt
 efrefper
 rfnkids
 wffinwgt
@@ -139,6 +140,8 @@ foreach wave of numlist 1(1)12 {
 
 	** drop if age <15
 	/*drop if tage < 15*/
+	** drop if not reference person?
+	drop if errp>2
 
 	** sort in correct way
 	sort ssuid eentaid epppnum srefmon

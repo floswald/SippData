@@ -100,6 +100,7 @@ etenure
 epubhse
 tmthrnt
 rfid
+whfnwgt
 efrefper
 rfnkids
 wffinwgt
@@ -137,6 +138,9 @@ foreach wave of numlist 1(1)9 {
 	** drop if non-interview
 	drop if eppintvw > 2
 	drop eppintvw
+	
+	** drop if not reference person?
+	drop if errp>2
 
 	** drop if age <15
 	/*drop if tage < 15*/
