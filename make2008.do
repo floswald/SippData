@@ -50,7 +50,7 @@ forvalues i = 1(1)13  {
 	if _rc!=0 {
 		
 		display "doing core wave `i'"
-		do sippl08puw`i'.do sippl08puw`i' l08puw`i'
+		do $progs/sippl08puw`i'.do sippl08puw`i' l08puw`i'
 	} 
 
 	if `i' < 12 {
@@ -60,7 +60,7 @@ forvalues i = 1(1)13  {
 		if _rc!=0 {
 			
 		display "doing topical wave `i'"
-			do sippp08putm`i'.do sippp08putm`i' p08putm`i'
+			do $progs/sippp08putm`i'.do sippp08putm`i' p08putm`i'
 		} 
 	}
 	** make longitudinal weight

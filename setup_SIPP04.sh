@@ -73,6 +73,7 @@ echo ""
 echo "downloading longitudinal weight"
 wget  --no-verbose -P ${dest}/${year}/do_NBER http://www.nber.org/sipp/${year}/sip04lw4.do
 wget  --no-verbose -P ${dest}/${year}/dat http://www.nber.org/sipp/${year}/lgtwgt2004w12.zip
+wget  --no-verbose -P ${dest}/${year}/dct http://www.nber.org/sipp/${year}/sip04lw4.dct
 unzip ${dest}/${year}/dat/lgtwgt2004w12.zip
 
 for file in sipp${yr}w sipp${yr}t
