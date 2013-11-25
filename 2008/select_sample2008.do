@@ -210,7 +210,7 @@ foreach wave of numlist 1(1)13 {
 }
 
 
-cd $root/2008/dta/core_and_topical
+cd core_and_topical
 use core_top1.dta, clear
 
 foreach wave of numlist 2(1)13 {
